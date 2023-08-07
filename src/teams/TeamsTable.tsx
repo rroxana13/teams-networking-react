@@ -8,10 +8,7 @@ type Team = {
   name: string;
   url: string;
 };
-type Props = {
-  loading: boolean;
-  teams: Team[];
-};
+
 type RowProps = {
   team: Team;
   deleteTeam(id: string): void;
@@ -51,9 +48,13 @@ function TeamRow(props: RowProps) {
   );
 }
 
-export function TeamsTable(props: Props) {
-  console.warn("TeamsTable", props);
+type Props = {
+  loading: boolean;
+  teams: Team[];
+  deleteTeam(id: string): void;
+};
 
+export function TeamsTable(props: Props) {
   return (
     <form id="teamsForm" action="" method="get" className={props.loading ? "loading-mask" : ""}>
       <table id="teamsTable">
@@ -78,13 +79,12 @@ export function TeamsTable(props: Props) {
           </tr>
         </thead>
         <tbody>
-          {" "}
           {props.teams.map(team => (
             <TeamRow
+              key={team.id}
               team={team}
               deleteTeam={function (id) {
-                console.warn("pls remove %o team", id);
-                deleteTeamRequest(id);
+                props.deleteTeam(id);
               }}
             />
           ))}
@@ -135,6 +135,10 @@ export class TeamsTableWrapper extends React.Component<WrapperProps, State> {
   }
 
   componentDidMount(): void {
+    this.loadTeams();
+  }
+
+  loadTeams() {
     loadTeamsRequest().then(teams => {
       console.info("loaded", teams);
       this.setState({
@@ -146,6 +150,18 @@ export class TeamsTableWrapper extends React.Component<WrapperProps, State> {
 
   render() {
     console.info("render");
-    return <TeamsTable loading={this.state.loading} teams={this.state.teams} />;
+    return (
+      <TeamsTable
+        loading={this.state.loading}
+        teams={this.state.teams}
+        deleteTeam={async id => {
+          this.setState({ loading: true });
+          const status = await deleteTeamRequest(id);
+          if (status.success) {
+            this.loadTeams();
+          }
+        }}
+      />
+    );
   }
 }
