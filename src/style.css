@@ -35,14 +35,14 @@ body {
   cursor: pointer;
 }
 
-#teamsTable {
+.table-view {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
-#teamsTable th,
-#teamsTable td {
+.table-view th,
+.table-view td {
   border: 1px solid #057988;
   padding: 5px;
   line-height: 25px;
@@ -51,24 +51,24 @@ body {
   overflow: hidden;
 }
 
-#teamsTable th {
+.table-view th {
   background-color: #0798ab;
   color: #fff;
 }
 
-#teamsTable tr:nth-child(even) {
+.table-view tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-#teamsTable input {
+.table-view input {
   width: 100%;
 }
 
-#teamsTable input:not([type="image" i]) {
+.table-view input:not([type="image" i]) {
   box-sizing: border-box;
 }
 
-#teamsTable input[type="text"] {
+.table-view input[type="text"] {
   width: 100%;
 }
 
@@ -89,7 +89,7 @@ body {
   min-width: 34px;
 }
 
-#teamsTable tr:hover .action-btn {
+.table-view tr:hover .action-btn {
   display: inline-block;
 }
 
