@@ -155,7 +155,7 @@ export function TeamsTable(props: Props & Actions) {
         <tbody>
           {props.teams.map(team => {
             if (team.id == props.team.id) {
-              return <EditTeamRow key={team.id} team={team} inputChange={props.inputChange} />;
+              return <EditTeamRow key={team.id} team={props.team} inputChange={props.inputChange} />;
             }
             return (
               <TeamRow
@@ -256,6 +256,13 @@ export class TeamsTableWrapper extends React.Component<WrapperProps, State> {
         }}
         inputChange={value => {
           console.info("change %o", value);
+          this.setState(state => {
+            const team = { ...state.team };
+            team.promotion = value;
+            return {
+              team
+            };
+          });
         }}
         save={() => {
           console.warn("save");
