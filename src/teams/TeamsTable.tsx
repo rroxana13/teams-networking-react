@@ -1,13 +1,6 @@
 import React from "react";
+import { Team } from "./models";
 import { deleteTeamRequest, loadTeamsRequest, updateTeamRequest } from "./middleware";
-
-type Team = {
-  id: string;
-  promotion: string;
-  members: string;
-  name: string;
-  url: string;
-};
 
 type RowProps = {
   team: Team;
