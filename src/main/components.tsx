@@ -8,11 +8,19 @@ export function ContentWrapper() {
           <button id="removeSelected">❌Remove selected</button>
         </div>
         <div>
-          <input type="search" name="search" id="searchTeams" placeholder="Search" />
+          <input
+            type="search"
+            name="search"
+            id="searchTeams"
+            placeholder="Search..."
+            onChange={e => {
+              console.info("search", e.target.value);
+            }}
+          />
           <label htmlFor="searchTeams">🔎</label>
         </div>
       </div>
-      <TeamsTableWrapper />
+      <TeamsTableWrapper search={"js"} />
     </div>
   );
 }

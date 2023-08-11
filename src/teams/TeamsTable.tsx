@@ -264,7 +264,9 @@ export function TeamsTable(props: Props & Actions) {
   );
 }
 
-type WrapperProps = {};
+type WrapperProps = {
+  search: string;
+};
 type State = {
   loading: boolean;
   teams: Team[];
@@ -348,11 +350,13 @@ export class TeamsTableWrapper extends React.Component<WrapperProps, State> {
   }
 
   render() {
-    console.info("render");
+    console.info("render %o", this.props.search);
+
+    const teams = filterElements(this.state.teams, this.props.search);
     return (
       <TeamsTable
         loading={this.state.loading}
-        teams={this.state.teams}
+        teams={teams}
         team={this.state.team}
         deleteTeam={id => {
           this.deleteTeam(id);
@@ -372,4 +376,19 @@ export class TeamsTableWrapper extends React.Component<WrapperProps, State> {
       />
     );
   }
+}
+
+// => T extends { [key: string]: string }
+function filterElements<T extends {}>(elements: T[], search: string) {
+  if (!search) {
+    return elements;
+  }
+  search = search.trim().toLowerCase();
+  return elements.filter(element => {
+    return Object.entries(element).some(([key, value]) => {
+      if (key !== "id") {
+        return typeof value === "string" ? value.toLowerCase().includes(search) : value === search;
+      }
+    });
+  });
 }
