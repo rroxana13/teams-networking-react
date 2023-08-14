@@ -6,12 +6,14 @@ import "./style.css";
 import { AppFooter } from "./footer/components";
 import AppHeader from "./header";
 import { ContentWrapper } from "./main/components";
+import { Page } from "./main/models";
 
 function App() {
+  const activePage: Page = "teams";
   return (
     <>
-      <AppHeader />
-      <ContentWrapper />
+      <AppHeader activePage={activePage} />
+      <ContentWrapper activePage={activePage} />
       <AppFooter />
     </>
   );

@@ -37,15 +37,15 @@ export function TodosPage() {
   return <div>Todos...</div>;
 }
 
-export function ContentWrapper() {
+type Props = {
+  activePage: Page;
+};
+export function ContentWrapper(props: Props) {
   //let search = "react";
 
-  const activePage: Page = "teams" as Page;
+  // const activePage: Page = "teams" as Page;
 
-  // {activePage === "home" ? <HomePage /> : null}
-  // {activePage === "todos" && <TodosPage />}
-
-  const page = getActivePage(activePage);
+  const page = getActivePage(props.activePage);
 
   return <div id="main">{page}</div>;
 }
