@@ -6,7 +6,7 @@ type Page = "home" | "todos" | "teams";
 export function MainMenu() {
   //   let active: string = "home";
 
-  const [active, setActive] = useState<Page>("home");
+  const [active, setActive] = useState<Page>("teams");
 
   const elements = [
     { text: "Home", name: "home" },

@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { TeamsTableWrapper } from "../teams/TeamsTable";
 
-export function ContentWrapper() {
-  //let search = "react";
-
+export function TeamsPage() {
   const [search, setSearch] = useState("");
-
   return (
-    <div id="main">
+    <>
       <div className="tbar">
         <div>
           <button id="removeSelected">❌Remove selected</button>
@@ -15,8 +12,6 @@ export function ContentWrapper() {
         <div>
           <input
             type="search"
-            name="search"
-            id="searchTeams"
             placeholder="Search..."
             onChange={e => {
               console.info("search", e.target.value);
@@ -29,6 +24,26 @@ export function ContentWrapper() {
         </div>
       </div>
       <TeamsTableWrapper search={search} />
+    </>
+  );
+}
+
+export function HomePage() {
+  return <div>Home...</div>;
+}
+
+export function TodosPage() {
+  return <div>Todos...</div>;
+}
+
+export function ContentWrapper() {
+  //let search = "react";
+
+  return (
+    <div id="main">
+      <HomePage />
+      <TodosPage />
+      <TeamsPage />
     </div>
   );
 }
