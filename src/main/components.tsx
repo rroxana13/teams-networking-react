@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TeamsTableWrapper } from "../teams/TeamsTable";
+import { Page } from "./models";
 
 export function TeamsPage() {
   const [search, setSearch] = useState("");
@@ -39,11 +40,26 @@ export function TodosPage() {
 export function ContentWrapper() {
   //let search = "react";
 
-  return (
-    <div id="main">
-      <HomePage />
-      <TodosPage />
-      <TeamsPage />
-    </div>
-  );
+  const activePage: Page = "teams" as Page;
+
+  // {activePage === "home" ? <HomePage /> : null}
+  // {activePage === "todos" && <TodosPage />}
+
+  const page = getActivePage(activePage);
+
+  return <div id="main">{page}</div>;
+}
+
+function getActivePage(activePage: Page) {
+  switch (activePage) {
+    case "home":
+      return <HomePage />;
+    case "todos":
+      return <TodosPage />;
+    case "teams":
+      return <TeamsPage />;
+    default: {
+      return <HomePage />;
+    }
+  }
 }
